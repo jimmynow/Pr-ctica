@@ -9,7 +9,10 @@ public class Login {
     private static int jaintentos = 3;
     static String jacontrasenaEncriptada = jaencriptarContraseña(jacontrasenaBuena);
 
-    public void main(String[] args) {
+    /**
+     *Se crea la ventana y se establece sus parámetros @param args
+     */
+    public void main(String[] args) {      
         JFrame jaframe = new JFrame("Acceso");
         jaframe.setSize(300, 150);
         jaframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,6 +24,10 @@ public class Login {
         jaframe.setVisible(true);
     }
 
+
+    /**
+     *Se modifica los campos del panel @param japanel
+     */
     private static void placeComponents(JPanel japanel) {
         japanel.setLayout(null);
 
@@ -45,7 +52,9 @@ public class Login {
         japanel.add(jabotonDeLogueo);
 
         jabotonDeLogueo.addActionListener(new ActionListener() {
-            @Override
+        /**
+     * Se crea el boton de evento para el ingreso y se verifica si es correcto o no
+     */
             public void actionPerformed(ActionEvent e) {
                 String jausuarioIngresado = userText.getText();
                 String jacontrasenaIngresada = new String(jatextoDeLaContraseña.getPassword());
@@ -66,14 +75,17 @@ public class Login {
             }
         });
     }
+      /**
+     * Encripta la contraseña utilizando la notacion hexadecimal
+     */
 
 public static String jaencriptarContraseña(String jaContrasenaBuena) {
     try {
         MessageDigest jamd = MessageDigest.getInstance("SHA-256");
         jamd.update(jaContrasenaBuena.getBytes());
-        byte[] bytes = jamd.digest();
+        byte[] jabytes = jamd.digest();
         StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
+        for (byte b : jabytes) {
             sb.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
         }
         return sb.toString();
