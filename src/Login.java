@@ -5,11 +5,11 @@ import java.awt.event.*;
 
 public class Login {
     private static String jausuarioBueno = "Jimmy Arias";
-    private static String jacontrasenaBuena = "contraseñaxd";
+    private static String jacontrasenaBuena = "1234";
     private static int jaintentos = 3;
     static String jacontrasenaEncriptada = jaencriptarContraseña(jacontrasenaBuena);
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         JFrame jaframe = new JFrame("Acceso");
         jaframe.setSize(300, 150);
         jaframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,7 +51,8 @@ public class Login {
                 String jacontrasenaIngresada = new String(jatextoDeLaContraseña.getPassword());
 
                 if (jausuarioIngresado.equals(jausuarioBueno) && jacontrasenaIngresada.equals(jacontrasenaBuena)) {
-                    JOptionPane.showMessageDialog(japanel, "Bienvenido!, esta es tu contraseña encriptada: "+jacontrasenaEncriptada);
+                    JOptionPane.showMessageDialog(japanel, "Bienvenido!, La contraseña encriptada se refleja en la terminal : ");
+                    System.out.println(jacontrasenaEncriptada);
                     System.exit(0);
                 } else {
                     jaintentos--;
@@ -68,9 +69,9 @@ public class Login {
 
 public static String jaencriptarContraseña(String jaContrasenaBuena) {
     try {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        md.update(jaContrasenaBuena.getBytes());
-        byte[] bytes = md.digest();
+        MessageDigest jamd = MessageDigest.getInstance("SHA-256");
+        jamd.update(jaContrasenaBuena.getBytes());
+        byte[] bytes = jamd.digest();
         StringBuilder sb = new StringBuilder();
         for (byte b : bytes) {
             sb.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
